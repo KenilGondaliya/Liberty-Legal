@@ -12,10 +12,13 @@
         "Intouch",
         "jodan",
         "johndoe",
+        "jscoverage",
         "libery",
         "MATIP",
+        "Microbundle",
         "Monbile",
         "nathnaiel",
+        "Nuxt",
         "Patner",
         "Pegination",
         "Perview",
@@ -24,6 +27,8 @@
         "responsi",
         "Samsa",
         "Swiper",
-        "Vokalia"
+        "tsbuildinfo",
+        "Vokalia",
+        "vuepress"
     ]
 }
