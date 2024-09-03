@@ -29,7 +29,7 @@ const Registration = () => {
         <h2 className="text-3xl font-bold mb-6 text-gray-800">Register</h2>
         {isSubmitting && <div><Loader width="100px" height="100px"/></div>}
         <form action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">z 
+          <div className="mb-4">
             <label
               htmlFor="fullName"
               className="block text-sm font-medium text-gray-700"

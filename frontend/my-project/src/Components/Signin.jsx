@@ -97,7 +97,7 @@ function Signin() {
                   },
                   minLength: {
                     value: 3,
-                    message: "Enter atleast minimum 3 character",
+                    message: "Enter atleast miaxmum 3 character",
                   },
                   
                   maxLength: {
