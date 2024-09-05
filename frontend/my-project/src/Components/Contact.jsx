@@ -117,7 +117,7 @@ function Contact() {
           >
             <div className=" flex flex-col items-center justify-center  gap-5">
 
-              <div className="w-screen flex flex-col items-center justify-center ">
+              <div className="w-full flex flex-col items-center justify-center ">
                 <input
                   className="md:w-4/5 lg:w-5/12 w-80 p-3 bg-white text-stone-400 h-14 focus:outline-none"
                   {...register("FullName", {
@@ -139,7 +139,7 @@ function Contact() {
                 {errors.FullName && <div className="">{errors.FullName.message}</div>}
               </div>
 
-              <div className="w-screen flex flex-col items-center justify-center ">
+              <div className="w-full flex flex-col items-center justify-center ">
                 <input
                   className="md:w-4/5 lg:w-5/12 w-80 p-3 bg-white text-stone-400 h-14 focus:outline-none"
                   {...register("email", {
@@ -161,7 +161,7 @@ function Contact() {
                 {errors.email && <div>{errors.email.message}</div>}
               </div>
 
-              <div className="w-screen flex flex-col items-center justify-center ">
+              <div className="w-full flex flex-col items-center justify-center ">
                 <input
                   className="md:w-4/5  lg:w-5/12 w-80  p-3 bg-white text-stone-400 h-14 focus:outline-none"
                   {...register("subject", {
@@ -243,7 +243,7 @@ function Contact() {
           </div>
         </section>
 
-        <div className="flex items-center justify-center gap-6 bg-white pb-20 ">
+        <div className=" flex items-center justify-center gap-6 bg-white pb-20 ">
           <div>
             <TbMailFilled size={21} />
           </div>

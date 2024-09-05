@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Loader from "./UI/Loader";
+import axios from 'axios';
 
 
 const Registration = () => {
@@ -20,7 +21,11 @@ const Registration = () => {
   }
 
   const onSubmit = async(data) => {
-    await delay(4)
+    axios({
+      method: 'post',
+      url: 'http://localHost:8000/api/v1/users/register',
+      data
+    });
     console.log(data)
   };
   return (
