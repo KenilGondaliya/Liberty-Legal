@@ -12,20 +12,20 @@ const Registration = () => {
     formState: { errors ,isSubmitting},
   } = useForm();
 
-  const delay = (d) => {
-      return new Promise((resolve, reject)=> {
-        setTimeout(()=>{
-          resolve()
-        }, d* 1000)
-      })
-  }
+  // const delay = (d) => {
+  //     return new Promise((resolve, reject)=> {
+  //       setTimeout(()=>{
+  //         resolve()
+  //       }, d* 1000)
+  //     })
+  // }
 
   const onSubmit = async(data) => {
-    axios({
-      method: 'post',
-      url: 'http://localHost:8000/api/v1/users/register',
-      data
-    });
+    // axios({
+    //   method: 'post',
+    //   url: 'http://localHost:8000/api/v1/users/register',
+    //   data
+    // });
     console.log(data)
   };
   return (
