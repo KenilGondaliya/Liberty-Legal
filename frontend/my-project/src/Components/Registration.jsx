@@ -1,57 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Loader from "./UI/Loader";
-import axios from 'axios';
-
+import axios from "axios";
 
 const Registration = () => {
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors ,isSubmitting},
+    formState: { errors, isSubmitting },
   } = useForm();
 
-  // const delay = (d) => {
-  //     return new Promise((resolve, reject)=> {
-  //       setTimeout(()=>{
-  //         resolve()
-  //       }, d* 1000)
-  //     })
-  // }
+  const [response, setResponse] = useState();
 
-  // const [data, setData] = useState([]);
-  // const [loading, setLoading] = useState(true);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post(
+        "http://localHost:8000/api/v1/users/register",
+        data
+      );
 
-  // useEffect(() => {
-  //   axios
-  //     .post('/api/v1/users/register')
-  //     .then(response => {
-  //       setData(response.data);
-  //       console.log(data);
-  //       setLoading(false);
-  //     })
-  //     .catch(error => {
-  //       console.error( error);
-  //       setLoading(false);
-  //     });
-  // }, []);
-
-  
-  const onSubmit = async(data) => {
-    
-    axios({
-      method: 'post',
-      url: 'http://localHost:8000/api/v1/users/register',
-      data
-    });
-    console.log(data)
+      setResponse(response.data.message);
+    } catch (error) {
+      if (error.response) {
+        setResponse(error.response.data.message);
+      } else {
+        setResponse("An error occurred during registration");
+      }
+    }
+    console.log(data);
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
         <h2 className="text-3xl font-bold mb-6 text-gray-800">Register</h2>
-        {isSubmitting && <div><Loader width="100px" height="100px"/></div>}
+        {isSubmitting && (
+          <div>
+            <Loader width="100px" height="100px" />
+          </div>
+        )}
         <form action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label
@@ -66,15 +53,14 @@ const Registration = () => {
                   value: true,
                   message: "This field is required",
                 },
-                minLength :{
-                  value:3,
-                  message: "Enter atleast minimum 3 character "
-                }
+                minLength: {
+                  value: 3,
+                  message: "Enter atleast minimum 3 character ",
+                },
               })}
               type="text"
               className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm "
               placeholder="Full Name"
-             
             />
             {errors.FullName && <div>{errors.FullName.message}</div>}
           </div>
@@ -87,20 +73,19 @@ const Registration = () => {
               Email
             </label>
             <input
-            {...register("email", {
-              required: {
-                value: true,
-                message: "This field is required",
-              },
-              minLength :{
-                value:3,
-                message: "Enter atleast minimum 3 character "
-              }
-            })}
+              {...register("email", {
+                required: {
+                  value: true,
+                  message: "This field is required",
+                },
+                minLength: {
+                  value: 3,
+                  message: "Enter atleast minimum 3 character ",
+                },
+              })}
               type="email"
               className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm "
               placeholder="you@example.com"
-            
             />
             {errors.email && <div>{errors.email.message}</div>}
           </div>
@@ -113,20 +98,20 @@ const Registration = () => {
               Username
             </label>
             <input
-            {...register("username", {
-              required: {
-                value: true,
-                message: "This field is required",
-              },
-              minLength :{
-                value:3,
-                message: "Enter atleast minimum 3 character "
-              },
-              maxLength :{
-                value:10,
-                message: "Enter atleast maximum 10 character "
-              }
-            })}
+              {...register("username", {
+                required: {
+                  value: true,
+                  message: "This field is required",
+                },
+                minLength: {
+                  value: 3,
+                  message: "Enter atleast minimum 3 character ",
+                },
+                maxLength: {
+                  value: 10,
+                  message: "Enter atleast maximum 10 character ",
+                },
+              })}
               type="text"
               className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
               placeholder="Username"
@@ -142,19 +127,19 @@ const Registration = () => {
               Password
             </label>
             <input
-               {...register("password", {
+              {...register("password", {
                 required: {
                   value: true,
                   message: "This field is required",
                 },
-                minLength :{
-                  value:3,
-                  message: "Enter atleast minimum 3 character "
+                minLength: {
+                  value: 3,
+                  message: "Enter atleast minimum 3 character ",
                 },
-                maxLength :{
-                  value:8,
-                  message: "Enter atleast maximum 8 character "
-                }
+                maxLength: {
+                  value: 8,
+                  message: "Enter atleast maximum 8 character ",
+                },
               })}
               type="password"
               className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm "
@@ -171,20 +156,20 @@ const Registration = () => {
               Mobile No
             </label>
             <input
-             {...register("mobile", {
-              required: {
-                value: true,
-                message: "This field is required",
-              },
-              minLength :{
-                value:3,
-                message: "Enter atleast minimum 3 character "
-              },
-              maxLength :{
-                value:10,
-                message: "Enter atleast maximum 10 character "
-              }
-            })}
+              {...register("mobile", {
+                required: {
+                  value: true,
+                  message: "This field is required",
+                },
+                minLength: {
+                  value: 3,
+                  message: "Enter atleast minimum 3 character ",
+                },
+                maxLength: {
+                  value: 10,
+                  message: "Enter atleast maximum 10 character ",
+                },
+              })}
               type="tel"
               className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm "
               placeholder="123-456-7890"
