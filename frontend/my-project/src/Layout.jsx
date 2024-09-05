@@ -12,7 +12,7 @@ function Layout() {
     // Simulate a loading delay
     setTimeout(() => {
       setLoading(false);
-    },3000); // You can adjust this delay as needed
+    },); // You can adjust this delay as needed
   }, []);
   return (
     <>

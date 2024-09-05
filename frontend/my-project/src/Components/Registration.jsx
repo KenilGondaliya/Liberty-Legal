@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Loader from "./UI/Loader";
 import axios from 'axios';
@@ -20,12 +20,31 @@ const Registration = () => {
   //     })
   // }
 
+  // const [data, setData] = useState([]);
+  // const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   axios
+  //     .post('/api/v1/users/register')
+  //     .then(response => {
+  //       setData(response.data);
+  //       console.log(data);
+  //       setLoading(false);
+  //     })
+  //     .catch(error => {
+  //       console.error( error);
+  //       setLoading(false);
+  //     });
+  // }, []);
+
+  
   const onSubmit = async(data) => {
-    // axios({
-    //   method: 'post',
-    //   url: 'http://localHost:8000/api/v1/users/register',
-    //   data
-    // });
+    
+    axios({
+      method: 'post',
+      url: 'http://localHost:8000/api/v1/users/register',
+      data
+    });
     console.log(data)
   };
   return (

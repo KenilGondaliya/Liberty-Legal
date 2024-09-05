@@ -8,7 +8,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      lowecase: true,
+      lowercase: true,
       trim: true,
       index: true,
     },
@@ -16,7 +16,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      lowecase: true,
+      lowercase: true,
       trim: true,
     },
     FullName: {
@@ -32,7 +32,7 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: [true, "Password is reuired"],
+      required: [true, "Password is required"],
     },
     refreshToken: {
       type: String,
@@ -58,9 +58,9 @@ userSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
       _id: this._id,
-      _email: this._email,
-      _username: this._username,
-      _fullName: this._fullName,
+      email: this.email,
+      username: this.username,
+      FullName: this.FullName,
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
@@ -73,9 +73,7 @@ userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {
       _id: this._id,
-      email: this.email,
-      username: this.username,
-      fullName: this.fullName,
+      
     },
     process.env.REFRESH_TOKEN_SECRET,
     {
