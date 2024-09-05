@@ -30,5 +30,7 @@
         "tsbuildinfo",
         "Vokalia",
         "vuepress"
-    ]
+    ],
+    "rapidapi.terminalLink.enabled": false,
+    "rapidapi.codegen.default": "javascript"
 }
