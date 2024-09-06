@@ -2,47 +2,97 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Loader from "./UI/Loader";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Registration = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const [response, setResponse] = useState();
+  const [responseMessage, setResponseMessage] = useState("");
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(
-        "/api/v1/users/register",
-        data
-      );
-
+      // Send POST request to the registration API
+      const response = await axios.post("/api/v1/users/register", data);
 
       console.log(response);
-      
-      setResponse(response.data.message);
+
+      // Update the response message state
+      setResponseMessage(response.data.message);
+
+      // Show success toast notification
+      toast.success("Registration successful!", {
+        position: "top-right",
+        autoClose: 5000, // 5 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      // Optionally, reset the form or redirect the user
+      // e.g., reset(); or navigate('/login');
     } catch (error) {
-      if (error.response) {
-        setResponse(error.response.data.message);
+      // Handle errors from the API
+      if (error.response && error.response.data && error.response.data.message) {
+        setResponseMessage(error.response.data.message);
+        // Show error toast notification with the message from the server
+        toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: 5000, // 5 seconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       } else {
-        setResponse("An error occurred during registration");
+        // Handle generic errors
+        setResponseMessage("An error occurred during registration");
+        toast.error("An error occurred during registration", {
+          position: "top-right",
+          autoClose: 5000, // 5 seconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     }
+
     console.log(data);
   };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      {/* Toast Container should be placed once in your app, preferably at the root */}
+      <ToastContainer />
+      
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
         <h2 className="text-3xl font-bold mb-6 text-gray-800">Register</h2>
-        {isSubmitting && (
-          <div>
-            <Loader width="100px" height="100px" />
+        
+        {/* Display response message if any */}
+        {responseMessage && (
+          <div className="mb-4 text-center text-sm text-red-500">
+            {responseMessage}
           </div>
         )}
-        <form action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
+
+        {/* Show Loader while submitting */}
+        {isSubmitting && (
+          <div className="mb-4 flex justify-center">
+            <Loader width="50px" height="50px" />
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {/* Full Name Field */}
           <div className="mb-4">
             <label
               htmlFor="fullName"
@@ -52,22 +102,27 @@ const Registration = () => {
             </label>
             <input
               {...register("FullName", {
-                required: {
-                  value: true,
-                  message: "This field is required",
-                },
+                required: "Full Name is required",
                 minLength: {
                   value: 3,
-                  message: "Enter atleast minimum 3 character ",
+                  message: "Enter at least 3 characters",
                 },
               })}
               type="text"
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm "
+              id="fullName"
+              className={`mt-1 p-2 w-full border ${
+                errors.FullName ? "border-red-500" : "border-gray-300"
+              } rounded-md shadow-sm`}
               placeholder="Full Name"
             />
-            {errors.FullName && <div>{errors.FullName.message}</div>}
+            {errors.FullName && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.FullName.message}
+              </p>
+            )}
           </div>
 
+          {/* Email Field */}
           <div className="mb-4">
             <label
               htmlFor="email"
@@ -77,22 +132,28 @@ const Registration = () => {
             </label>
             <input
               {...register("email", {
-                required: {
-                  value: true,
-                  message: "This field is required",
-                },
-                minLength: {
-                  value: 3,
-                  message: "Enter atleast minimum 3 character ",
+                required: "Email is required",
+                pattern: {
+                  value:
+                    /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                  message: "Enter a valid email address",
                 },
               })}
               type="email"
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm "
+              id="email"
+              className={`mt-1 p-2 w-full border ${
+                errors.email ? "border-red-500" : "border-gray-300"
+              } rounded-md shadow-sm`}
               placeholder="you@example.com"
             />
-            {errors.email && <div>{errors.email.message}</div>}
+            {errors.email && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.email.message}
+              </p>
+            )}
           </div>
 
+          {/* Username Field */}
           <div className="mb-4">
             <label
               htmlFor="username"
@@ -102,26 +163,31 @@ const Registration = () => {
             </label>
             <input
               {...register("username", {
-                required: {
-                  value: true,
-                  message: "This field is required",
-                },
+                required: "Username is required",
                 minLength: {
                   value: 3,
-                  message: "Enter atleast minimum 3 character ",
+                  message: "Enter at least 3 characters",
                 },
                 maxLength: {
                   value: 10,
-                  message: "Enter atleast maximum 10 character ",
+                  message: "Enter no more than 10 characters",
                 },
               })}
               type="text"
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+              id="username"
+              className={`mt-1 p-2 w-full border ${
+                errors.username ? "border-red-500" : "border-gray-300"
+              } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500`}
               placeholder="Username"
             />
-            {errors.username && <div>{errors.username.message}</div>}
+            {errors.username && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.username.message}
+              </p>
+            )}
           </div>
 
+          {/* Password Field */}
           <div className="mb-4">
             <label
               htmlFor="password"
@@ -131,26 +197,31 @@ const Registration = () => {
             </label>
             <input
               {...register("password", {
-                required: {
-                  value: true,
-                  message: "This field is required",
-                },
+                required: "Password is required",
                 minLength: {
                   value: 3,
-                  message: "Enter atleast minimum 3 character ",
+                  message: "Enter at least 3 characters",
                 },
                 maxLength: {
                   value: 8,
-                  message: "Enter atleast maximum 8 character ",
+                  message: "Enter no more than 8 characters",
                 },
               })}
               type="password"
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm "
+              id="password"
+              className={`mt-1 p-2 w-full border ${
+                errors.password ? "border-red-500" : "border-gray-300"
+              } rounded-md shadow-sm`}
               placeholder="••••••••"
             />
-            {errors.password && <div>{errors.password.message}</div>}
+            {errors.password && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.password.message}
+              </p>
+            )}
           </div>
 
+          {/* Mobile Number Field */}
           <div className="mb-6">
             <label
               htmlFor="mobile"
@@ -160,32 +231,37 @@ const Registration = () => {
             </label>
             <input
               {...register("mobile", {
-                required: {
-                  value: true,
-                  message: "This field is required",
-                },
-                minLength: {
-                  value: 3,
-                  message: "Enter atleast minimum 3 character ",
-                },
-                maxLength: {
+                required: "Mobile number is required",
+                pattern: {
                   value: 10,
-                  message: "Enter atleast maximum 10 character ",
+                  message: "Enter a valid mobile number (e.g., 123-456-7890)",
                 },
               })}
               type="tel"
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm "
+              id="mobile"
+              className={`mt-1 p-2 w-full border ${
+                errors.mobile ? "border-red-500" : "border-gray-300"
+              } rounded-md shadow-sm`}
               placeholder="123-456-7890"
             />
-            {errors.mobile && <div>{errors.mobile.message}</div>}
+            {errors.mobile && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.mobile.message}
+              </p>
+            )}
           </div>
 
+          {/* Submit Button */}
           <button
-            disabled={isSubmitting}
             type="submit"
-            className="w-full py-2 px-4 btnHover text-white font-semibold rounded-md shadow hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 disabled:opacity-75"
+            disabled={isSubmitting}
+            className={`w-full py-2 px-4 text-white font-semibold rounded-md shadow ${
+              isSubmitting
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700"
+            } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
           >
-            Register
+            {isSubmitting ? "Registering..." : "Register"}
           </button>
         </form>
       </div>
