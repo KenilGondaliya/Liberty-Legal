@@ -16,10 +16,13 @@ const Registration = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        "http://localHost:8000/api/v1/users/register",
+        "/api/v1/users/register",
         data
       );
 
+
+      console.log(response);
+      
       setResponse(response.data.message);
     } catch (error) {
       if (error.response) {
