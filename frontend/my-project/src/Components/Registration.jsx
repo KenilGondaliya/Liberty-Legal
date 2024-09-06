@@ -19,8 +19,7 @@ const Registration = () => {
       // Send POST request to the registration API
       const response = await axios.post("/api/v1/users/register", data);
 
-      console.log(response);
-
+      // 
       // Update the response message state
       setResponseMessage(response.data.message);
 
@@ -177,7 +176,7 @@ const Registration = () => {
               id="username"
               className={`mt-1 p-2 w-full border ${
                 errors.username ? "border-red-500" : "border-gray-300"
-              } rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500`}
+              } rounded-md shadow-sm focus:ring-stone-500 focus:border-stone-500`}
               placeholder="Username"
             />
             {errors.username && (
@@ -258,7 +257,7 @@ const Registration = () => {
             className={`w-full py-2 px-4 text-white font-semibold rounded-md shadow ${
               isSubmitting
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-indigo-600 hover:bg-indigo-700"
+                : "bg-stone-900 hover:bg-indigo-700"
             } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
           >
             {isSubmitting ? "Registering..." : "Register"}
