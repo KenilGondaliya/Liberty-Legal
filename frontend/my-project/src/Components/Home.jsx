@@ -35,7 +35,6 @@ import band5 from "../assets/band5.png";
 import Loader from "./UI/Loader";
 import { useForm } from "react-hook-form";
 
-
 function Home() {
   const items = [
     { image: james, name: "JAMES MILNER" },
@@ -170,12 +169,20 @@ function Home() {
           </div>
           <MdOutlineHorizontalRule size={50} color="#b6a188" />
           <div className="w-fit grid lg:grid-cols-3 lg:row-span-3 lg:col-span-2 gap-8 pt-10">
-            <Card image={icon1} heading="Coporate & Securities" to="/coporate" />
-            <Card image={icon2} heading="Real Estate Law" to="/realEstate"/>
-            <Card image={icon3} heading="Health Care Law" to="/health"/>
-            <Card image={icon4} heading="Insurance Law" to="/insurance"/>
-            <Card image={icon5} heading="Construction & Engineering" to="/construction"/>
-            <Card image={icon6} heading="Ecommerce Law" to="/ecommerce"/>
+            <Card
+              image={icon1}
+              heading="Coporate & Securities"
+              to="/coporate"
+            />
+            <Card image={icon2} heading="Real Estate Law" to="/realEstate" />
+            <Card image={icon3} heading="Health Care Law" to="/health" />
+            <Card image={icon4} heading="Insurance Law" to="/insurance" />
+            <Card
+              image={icon5}
+              heading="Construction & Engineering"
+              to="/construction"
+            />
+            <Card image={icon6} heading="Ecommerce Law" to="/ecommerce" />
           </div>
         </section>
 
@@ -186,10 +193,10 @@ function Home() {
           >
             <div className="lg:border lg:border-stone-400  lg:h-5/6 lg:w-11/12 flex flex-col items-center justify-center  ">
               <div className="flex flex-col items-center  gap-9">
-                <h1 className="text-white lg:text-4xl text-3xl font-bold">
+                <h1 className="text-white lg:text-4xl sm:text-3xl md:text-4xl font-bold">
                   Free Consultation
                 </h1>
-                <div className="flex flex-col items-center text-stone-400 font-medium text-sm lg:text-base">
+                <div className="flex flex-col items-center text-stone-400 font-medium text-xs md:text-base lg:text-base">
                   <p>
                     Law is complicate matter. It can cause you a big problem
                   </p>
@@ -242,7 +249,7 @@ function Home() {
                             message: "Enter atleast minimum 3 character ",
                           },
                         })}
-                        className="lg:w-96 w-80 p-3 text-white  h-14 focus:outline-none"
+                        className="lg:w-96 w-80 p-3 text-white h-14 focus:outline-none"
                         style={{ backgroundColor: "#373737" }}
                         placeholder="Phone*"
                         spellCheck="false"
@@ -261,7 +268,7 @@ function Home() {
                             message: "This field is required",
                           },
                         })}
-                        className="lg:w-96 w-80 p-3 text-white  h-14"
+                        className="lg:w-96 w-80 p-3 text-white h-14"
                         style={{ backgroundColor: "#373737" }}
                       >
                         <option value="Corporate Law">Corporate Law</option>
@@ -286,7 +293,7 @@ function Home() {
 
                     <div className="pt-5">
                       <input
-                        className="lg:w-96 w-80 p-3 text-white  h-14 focus:outline-none"
+                        className="lg:w-96 w-80 p-3 text-white h-14 focus:outline-none"
                         {...register("email", {
                           required: {
                             value: true,
@@ -307,7 +314,7 @@ function Home() {
                       )}
                     </div>
 
-                    <div className="hidden lg:block lg:col-span-2  ">
+                    <div className="hidden lg:block lg:col-span-2 ">
                       <textarea
                         {...register("msg", {
                           required: {
@@ -324,7 +331,7 @@ function Home() {
                         style={{ backgroundColor: "#373737" }}
                         placeholder="Message*"
                         spellCheck="false"
-                        className="p-4 text-white  focus:outline-none"
+                        className="p-4 text-white focus:outline-none"
                       ></textarea>
                       {errors.msg && (
                         <div className="text-white">{errors.msg.message}</div>
