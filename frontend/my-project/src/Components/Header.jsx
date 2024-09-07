@@ -4,12 +4,14 @@ import { Link, NavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../assets/svg/liberty.svg";
 
+
 function Header() {
   const [isMenuOpen, SetIsMenuOpen] = useState(false);
   const HandleIsMenuOpen = () => {
     SetIsMenuOpen(!isMenuOpen);
   };
 
+ 
   return (
     <div className="border-borderBottom header text-redwhite-300 border-b ">
       <nav className="h-20 flex items-center justify-between mx-16 ">
@@ -63,6 +65,16 @@ function Header() {
                 }
               >
                 Sing in
+              </NavLink>
+            </li>
+            <li>
+              <NavLink 
+              to="/logout"
+                className={({ isActive }) =>
+                  `hover:text-black ${isActive ? "text-black" : "headerColor"}`
+                }
+              >
+                LogOut
               </NavLink>
             </li>
           </ul>
@@ -138,6 +150,16 @@ function Header() {
               Sing in
             </NavLink>
           </li>
+          <li>
+              <NavLink 
+              to="/logout"
+                className={({ isActive }) =>
+                  `hover:text-black ${isActive ? "text-black" : "headerColor"}`
+                }
+              >
+                LogOut
+              </NavLink>
+            </li>
         </ul>
       </div>
     </div>

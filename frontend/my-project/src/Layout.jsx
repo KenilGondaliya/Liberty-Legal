@@ -15,40 +15,8 @@ function Layout() {
     });
   }, []);
 
-  const refreshAccessToken = async () => {
-    try {
-      const refreshToken = localStorage.getItem("refreshToken");
-      if (refreshToken) {
-        const response = await axios.post("/api/v1/users/refresh-token", {
-          refreshToken: refreshToken,
-        });
   
-        // Update tokens
-        localStorage.setItem("accessToken", response.data.accessToken);
-        axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.accessToken}`;
-      }
-    } catch (error) {
-      console.log("Unable to refresh token", error);
-      
-      navigate("/login");
-    }
-  };
   
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-
-    if (accessToken) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-
-      axios
-        .post("/api/v1/users/refresh-token")
-        .then((response) => {})
-        .catch((error) => {
-          refreshAccessToken();
-        });
-    }
-  }, []);
   return (
     <>
       {loading && (

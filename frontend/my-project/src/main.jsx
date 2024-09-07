@@ -10,7 +10,6 @@ import About from './Components/About.jsx'
 import PracticeArea from './Components/PracticeArea.jsx'
 import Signin from './Components/Signin.jsx'
 import Registration from './Components/Registration.jsx'
-import Consaltant from './Components/Consaltant.jsx'
 import Coporate from "./Components/PreacticeAreaPage/Coporate.jsx"
 import RealEstate from "./Components/PreacticeAreaPage/RealEstate.jsx"
 import Health from "./Components/PreacticeAreaPage/Health.jsx"
@@ -19,6 +18,7 @@ import Construction from "./Components/PreacticeAreaPage/Construction.jsx"
 import Ecommerce from "./Components/PreacticeAreaPage/Ecommerce.jsx"
 import ForgetPassword from './Components/ForgetPassword.jsx'
 import Profile from "./Components/Profile.jsx"
+import Logout from './Components/Logout.jsx'
 
 const router = createBrowserRouter([
   {
@@ -56,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "registration",
         element : <Registration/>
+      },
+      {
+        path: "logout",
+        element : <Logout/>
       },
       {
         path: "coporate",
