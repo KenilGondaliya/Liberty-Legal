@@ -17,6 +17,8 @@ import Health from "./Components/PreacticeAreaPage/Health.jsx"
 import Insurance from "./Components/PreacticeAreaPage/Insurance.jsx"
 import Construction from "./Components/PreacticeAreaPage/Construction.jsx"
 import Ecommerce from "./Components/PreacticeAreaPage/Ecommerce.jsx"
+import ForgetPassword from './Components/ForgetPassword.jsx'
+import Profile from "./Components/Profile.jsx"
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
       {
         path: "sing-in",
         element: <Signin/>
+      },
+      {
+        path: "profile",
+        element: <Profile/>
+      },
+      {
+        path: "forgetPassword",
+        element: <ForgetPassword/>
       },
       {
         path: "registration",

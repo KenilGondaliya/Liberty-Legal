@@ -143,4 +143,32 @@ const logoutUser = asyncHandler(async (req, res) => {
     .clearCookie("refreshToken", options)
     .json(new ApiResponse(200, {}, "User loggedOut"));
 });
-export { registerUser, loginUser, logoutUser };
+
+const changeCurrentPassword = asyncHandler(async (req, res) => {
+  // req.body email, password, confPassword
+  //target user
+  //check email
+  //cheack password and confirm password
+  //update the password
+  // res json and
+
+  const { email, password, confPassword } = req.body;
+
+  const user = await User.findById(req.user?._id);
+
+  if (!email) {
+    throw new ApiError(400, "Invalid Email");
+  }
+
+  user.password = password;
+  await user.save({ validateBeforeSave: false });
+
+  if (!password === confPassword) {
+    throw new ApiError(400, "Invalid Confirm Password");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Password change Successfully"));
+});
+export { registerUser, loginUser, logoutUser, changeCurrentPassword };

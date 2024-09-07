@@ -5,7 +5,7 @@ import Loader from "./UI/Loader";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Signin() {
   const {
@@ -34,7 +34,7 @@ function Signin() {
         progress: undefined,
          
       });
-      navigate("/")
+      navigate("/profile")
     } catch (error) {
       if (
         error.response &&
@@ -141,12 +141,12 @@ function Signin() {
                   Password
                 </label>
                 <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold theme hover:text-red-700"
+                  <Link
+                    to="/forgetPassword"
+                    className="font-semibold theme hover:text-black"
                   >
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="mt-2">
