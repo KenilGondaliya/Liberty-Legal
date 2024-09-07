@@ -4,6 +4,7 @@ import Loader from "./UI/Loader";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const {
@@ -13,18 +14,16 @@ const Registration = () => {
   } = useForm();
 
   const [responseMessage, setResponseMessage] = useState("");
-
+  const navigate = useNavigate();
+  
   const onSubmit = async (data) => {
     try {
-      // Send POST request to the registration API
+
       const response = await axios.post("/api/v1/users/register", data);
 
-      // 
-      // Update the response message state
       setResponseMessage(response.data.message);
 
-      // Show success toast notification
-      toast.success("Registration successful!", {
+      toast.success("Registration Successfully!!", {
         position: "top-right",
         autoClose: 5000, // 5 seconds
         hideProgressBar: false,
@@ -34,16 +33,17 @@ const Registration = () => {
         progress: undefined,
       });
 
-      // Optionally, reset the form or redirect the user
+      navigate('/sing-in')
+      
       // e.g., reset(); or navigate('/login');
     } catch (error) {
-      // Handle errors from the API
+      
       if (error.response && error.response.data && error.response.data.message) {
         setResponseMessage(error.response.data.message);
-        // Show error toast notification with the message from the server
+        
         toast.error(error.response.data.message, {
           position: "top-right",
-          autoClose: 5000, // 5 seconds
+          autoClose: 5000, 
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -51,11 +51,11 @@ const Registration = () => {
           progress: undefined,
         });
       } else {
-        // Handle generic errors
+        
         setResponseMessage("An error occurred during registration");
         toast.error("An error occurred during registration", {
           position: "top-right",
-          autoClose: 5000, // 5 seconds
+          autoClose: 5000, 
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -83,7 +83,7 @@ const Registration = () => {
           </div>
         )}
 
-        {/* Show Loader while submitting */}
+        
         {isSubmitting && (
           <div className="mb-4 flex justify-center">
             <Loader width="50px" height="50px" />
@@ -91,7 +91,7 @@ const Registration = () => {
         )}
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* Full Name Field */}
+         
           <div className="mb-4">
             <label
               htmlFor="fullName"
@@ -121,7 +121,7 @@ const Registration = () => {
             )}
           </div>
 
-          {/* Email Field */}
+          
           <div className="mb-4">
             <label
               htmlFor="email"
@@ -152,7 +152,7 @@ const Registration = () => {
             )}
           </div>
 
-          {/* Username Field */}
+          
           <div className="mb-4">
             <label
               htmlFor="username"
@@ -185,8 +185,7 @@ const Registration = () => {
               </p>
             )}
           </div>
-
-          {/* Password Field */}
+          
           <div className="mb-4">
             <label
               htmlFor="password"
@@ -220,7 +219,7 @@ const Registration = () => {
             )}
           </div>
 
-          {/* Mobile Number Field */}
+          
           <div className="mb-6">
             <label
               htmlFor="mobile"
@@ -250,7 +249,6 @@ const Registration = () => {
             )}
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={isSubmitting}
