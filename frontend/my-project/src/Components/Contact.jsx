@@ -20,16 +20,7 @@ function Contact() {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const delay = (d) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve();
-      }, d * 1000);
-    });
-  };
-
   const onSubmit = async (data) => {
-    await delay(4);
     console.log(data);
   };
   return (
@@ -40,8 +31,8 @@ function Contact() {
           style={{ backgroundImage: `url(${libery2})` }}
         >
           <div className="flex flex-col items-center gap-3 text-white font-bold">
-            <p className="lg:text-8xl">Contact Us</p>
-            <p className="lg:text-3xl">Get Intouch</p>
+            <p className="lg:text-8xl text-5xl">Contact Us</p>
+            <p className="lg:text-3xl text-xl">Get Intouch</p>
           </div>
         </div>
 
@@ -53,15 +44,15 @@ function Contact() {
             <div>
               <BsFillTelephoneFill color="white" size={30} />
             </div>
-            <div className=" font-bold text-xl ">
+            <div className=" font-bold md:text-xl">
               <h1>Phone</h1>
             </div>
-            <div className="font-medium flex flex-col items-center lg:items-start">
+            <div className="font-medium flex flex-col items-center lg:items-start text-sm md:text-base">
               <p>A wonderful serenity has taken possession</p>
               <p>of my entire soul, like these.</p>
             </div>
 
-            <div className="theme text-sm">
+            <div className="theme text-sm md:text-lg">
               <p>+1-2345-2345</p>
             </div>
           </div>
@@ -69,15 +60,15 @@ function Contact() {
             <div>
               <CiMail color="white" size={30} />
             </div>
-            <div className=" font-bold text-xl ">
+            <div className=" font-bold md:text-xl">
               <h1>Email</h1>
             </div>
-            <div className="font-medium flex flex-col items-center lg:items-start">
+            <div className="font-medium flex flex-col items-center lg:items-start text-sm md:text-base">
               <p>A wonderful serenity has taken possession</p>
               <p>of my entire soul, like these.</p>
             </div>
 
-            <div className="theme text-sm">
+            <div className="theme text-sm md:text-lg">
               <p>Contact@goodlayers.com</p>
             </div>
           </div>
@@ -85,15 +76,15 @@ function Contact() {
             <div>
               <FaLocationArrow color="white" size={30} />
             </div>
-            <div className=" font-bold text-xl ">
+            <div className=" font-bold md:text-xl ">
               <h1>Location</h1>
             </div>
-            <div className="font-medium flex flex-col items-center lg:items-start">
+            <div className="font-medium flex flex-col items-center lg:items-start text-sm md:text-base">
               <p>4 apt. Flawing Street. The Grand Avenue.</p>
               <p>Liverpool, UK 33342</p>
             </div>
 
-            <div className="theme text-sm">
+            <div className="theme text-sm md:text-lg">
               <p>View On Google Map</p>
             </div>
           </div>
@@ -204,14 +195,9 @@ function Contact() {
                   className="p-4 md:w-full lg:w-5/12 w-80  text-stone-400 focus:outline-none"
                 >
                 </textarea>
-                  {errors.message && <div>{errors.message.message}</div>}
-                
-                 
+                  {errors.message && <div>{errors.message.message}</div>}             
               </div>
-
-              
-                
-                
+     
               
               <div
                 className=" hidden lg:block lg:col-span-2"
@@ -223,8 +209,6 @@ function Contact() {
               >
                 <Button disabled={isSubmitting} width="200px" text="SUBMIT NOW" />
               </div>
-              
-              
             </div>
           </form>
           </div>
