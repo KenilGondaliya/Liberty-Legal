@@ -23,6 +23,8 @@ function Signin() {
       const response = await axios.post("/api/v1/users/login", data);
 
       setResponseMsg(response.data.message);
+      localStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem("refreshToken", response.data.refreshToken);
 
       toast.success("LogIn Successfully!!", {
         position: "top-right",
@@ -32,9 +34,8 @@ function Signin() {
         pauseOnHover: false,
         draggable: true,
         progress: undefined,
-         
       });
-      navigate("/profile")
+      // navigate("/profile");
     } catch (error) {
       if (
         error.response &&
@@ -45,7 +46,7 @@ function Signin() {
 
         toast.error(error.response.data.message, {
           position: "top-right",
-          autoClose: 5000, 
+          autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -57,7 +58,7 @@ function Signin() {
 
         toast.error("User does not exists", {
           position: "top-right",
-          autoClose: 5000, 
+          autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,

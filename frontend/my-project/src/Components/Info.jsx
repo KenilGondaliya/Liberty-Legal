@@ -38,7 +38,7 @@ function Info() {
             </div>
             <span className='pl-9 text-stone-500'>Mon - Fri : 09:00-17:00</span>
           </div>
-          <Link to="free-consultant">
+          <Link to="profile">
         <Button text="FREE CONSULTANT" icon={BiMessageRounded} fontSize="13px"/>
           </Link>
         </div>
