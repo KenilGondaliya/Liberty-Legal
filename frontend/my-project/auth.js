@@ -13,7 +13,6 @@ export const saveTokens = (accessToken, refreshToken) => {
     return localStorage.getItem("refreshToken");
   };
   
-  // Check if the user is authenticated by checking for an access token
   export const isAuthenticated = () => {
     return !!getAccessToken(); 
   };
