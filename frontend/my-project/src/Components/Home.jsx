@@ -34,6 +34,7 @@ import band4 from "../assets/band4.png";
 import band5 from "../assets/band5.png";
 import Loader from "./UI/Loader";
 import { useForm } from "react-hook-form";
+import useWeb3Forms from "@web3forms/react";
 
 function Home() {
   const items = [
@@ -76,22 +77,33 @@ function Home() {
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors, isSubmitting },
+    reset,
+    formState: { errors, isSubmitSuccessful, isSubmitting },
   } = useForm();
 
-  const delay = (d) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve();
-      }, d * 1000);
-    });
-  };
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [result, setResult] = useState(null);
 
-  const onSubmit = async (data) => {
-    await delay(4);
-    console.log(data);
-  };
+  const accessKey = "8c69e09c-428c-413b-bf93-a66c642565e8";
+
+  const { submit: onSubmit } = useWeb3Forms({
+    access_key: accessKey,
+    url: "/web3forms-api",
+    settings: {
+      from_name: 'Acme Inc',
+      subject: 'New Contact Message from your Website',
+    },
+    onSuccess: (msg, data) => {
+      setIsSuccess(true);
+      setResult(msg);
+      reset(); // Reset form after successful submission
+    },
+    onError: (msg, data) => {
+      setIsSuccess(false);
+      setResult(msg);
+    },
+  });
+  
   return (
     <>
       <div className="h-full" style={{ height: "160vh" }}>
@@ -337,6 +349,7 @@ function Home() {
                         <div className="text-white">{errors.msg.message}</div>
                       )}
                     </div>
+
                     <div className="hidden lg:block lg:col-span-2 pb-20">
                       <Button
                         disabled={isSubmitting}
@@ -350,12 +363,14 @@ function Home() {
                         placeholder="Message*"
                       />
                     </div>
+
                     <div className="block lg:hidden lg:col-span-2">
                       <Button
                         disabled={isSubmitting}
                         width="322px"
                         text="SUBMIT NOW"
                       />
+                      <div>{result}</div>
                     </div>
                   </div>
                 </form>
@@ -381,7 +396,7 @@ function Home() {
               style={{ width: "80vw", height: "100vh" }}
             >
               <Slider {...settings}>
-                {items.map((item, index) => (
+                {items.map((item) => (
                   <PatnerCard image={item.image} name={item.name} />
                 ))}
               </Slider>
