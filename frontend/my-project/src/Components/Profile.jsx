@@ -7,8 +7,8 @@ function Profile() {
 
   useEffect(() => {
     if (!isAuthenticated()) {
-
-      navigate("/sing-in");
+      navigate("/error");
+      
     }
   }, [navigate]); 
 

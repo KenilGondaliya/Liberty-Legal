@@ -22,9 +22,9 @@ function Signin() {
     try {
       const response = await axios.post("/api/v1/users/login", data);
 
-      setResponseMsg(response.data.message);
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
+      setResponseMsg(response.data.message);
 
       toast.success("LogIn Successfully!!", {
         position: "top-right",
@@ -35,7 +35,7 @@ function Signin() {
         draggable: true,
         progress: undefined,
       });
-      // navigate("/profile");
+      navigate("/");
     } catch (error) {
       if (
         error.response &&
@@ -43,7 +43,7 @@ function Signin() {
         error.response.data.message
       ) {
         setResponseMsg(error.response.data.message);
-
+        
         toast.error(error.response.data.message, {
           position: "top-right",
           autoClose: 5000,

@@ -4,7 +4,7 @@ import Info from "./Components/Info";
 import { Outlet } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Loader from "./Components/UI/Loader";
-import axios from "axios";
+
 
 function Layout() {
   const [loading, setLoading] = useState(true);
@@ -14,11 +14,10 @@ function Layout() {
       setLoading(false);
     });
   }, []);
-
-  
   
   return (
     <>
+
       {loading && (
         <div className=" flex w-full h-screen items-center justify-center">
           {" "}

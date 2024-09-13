@@ -8,7 +8,6 @@ export const saveTokens = (accessToken, refreshToken) => {
     return localStorage.getItem("accessToken");
   };
   
-  
   export const getRefreshToken = () => {
     return localStorage.getItem("refreshToken");
   };
@@ -16,7 +15,6 @@ export const saveTokens = (accessToken, refreshToken) => {
   export const isAuthenticated = () => {
     return !!getAccessToken(); 
   };
-  
   
   export const clearTokens = () => {
     localStorage.removeItem("accessToken");
