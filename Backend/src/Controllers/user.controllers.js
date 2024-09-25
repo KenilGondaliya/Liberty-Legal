@@ -4,6 +4,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
+
 const generateAccessAndRefrshTokens = async (userId) => {
   try {
     const user = await User.findById(userId);
@@ -174,7 +175,8 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 });
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
-  const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
+  const incomingRefreshToken =
+    req.cookies.refreshToken || req.body.refreshToken;
 
   if (incomingRefreshToken) {
     throw new ApiError(401, "unauthorized request");
@@ -199,7 +201,6 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     const options = {
       httpOnly: true,
       secure: true,
-      
     };
 
     const { accessToken, newRefreshToken } =
@@ -221,10 +222,12 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   }
 });
 
+
 export {
   registerUser,
   loginUser,
   logoutUser,
   changeCurrentPassword,
   refreshAccessToken,
+  
 };

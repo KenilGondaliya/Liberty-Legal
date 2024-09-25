@@ -19,6 +19,7 @@ import Ecommerce from "./Components/PreacticeAreaPage/Ecommerce.jsx";
 import ForgetPassword from "./Components/ForgetPassword.jsx";
 import Profile from "./Components/Profile.jsx";
 import Error from "./Components/UI/Error.jsx";
+import Success from "./Components/UI/Success.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,11 +41,6 @@ const router = createBrowserRouter([
       {
         path: "practice-area",
         element: <PracticeArea />,
-      },
-      
-      {
-        path: "profile",
-        element: <Profile />,
       },
       {
         path: "coporate",
@@ -87,6 +83,14 @@ const router = createBrowserRouter([
   {
     path: "forgetPassword",
     element: <ForgetPassword />,
+  },
+  {
+    path: "profile",
+    element: <Profile />,
+  },
+  {
+    path: "success",
+    element: <Success/>,
   },
 ]);
 

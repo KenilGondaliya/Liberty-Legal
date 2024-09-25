@@ -10,6 +10,7 @@ import { FaSkype } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 import Loader from "./UI/Loader";
+import emailjs from "emailjs-com";
 
 
 function Contact() {
@@ -20,7 +21,23 @@ function Contact() {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data) => {  
+    emailjs
+      .send(
+        "service_6wpzgzi", // Replace with your Service ID
+        "template_6w8y6cp", // Replace with your Template ID
+        data, // Send form data
+        "gJTUbU5XjoNFr8sz-" // Add unique ID to the submission
+      )
+      .then((response) => {
+        console.log("SUCCESS!", response.status, response.text);
+        alert("Email sent successfully!");
+      })
+      .catch((error) => {
+        console.error("FAILED...", error);
+        alert("Failed to send email.");
+      });
+
     console.log(data);
   };
   return (
@@ -35,7 +52,7 @@ function Contact() {
             <p className="lg:text-3xl text-xl">Get Intouch</p>
           </div>
         </div>
-
+        
         <div
           className="w-full lg:h-96 h-screen flex flex-col lg:flex-row gap-16 text-white items-center justify-center"
           style={{ backgroundColor: "#161616" }}
@@ -96,10 +113,13 @@ function Contact() {
             <p className="text-stone-400 text-lg">
               and we will get back to you.
             </p>
-          {isSubmitting && <div><Loader width="100px" height="100px"/></div>}
+            {isSubmitting && (
+              <div>
+                <Loader width="100px" height="100px" />
+              </div>
+            )}
           </div>
 
-          
           <form
             action="#"
             method="POST"
@@ -107,7 +127,6 @@ function Contact() {
             // className="hidden lg:block"
           >
             <div className=" flex flex-col items-center justify-center  gap-5">
-
               <div className="w-full flex flex-col items-center justify-center ">
                 <input
                   className="md:w-4/5 lg:w-5/12 w-80 p-3 bg-white text-stone-400 h-14 focus:outline-none"
@@ -122,12 +141,13 @@ function Contact() {
                     },
                   })}
                   type="text"
-                   spellCheck="false"
+                  spellCheck="false"
                   placeholder="Full Name*"
                   // style={{ width: "600px" }}
-                 
                 />
-                {errors.FullName && <div className="">{errors.FullName.message}</div>}
+                {errors.FullName && (
+                  <div>{errors.FullName.message}</div>
+                )}
               </div>
 
               <div className="w-full flex flex-col items-center justify-center ">
@@ -144,10 +164,9 @@ function Contact() {
                     },
                   })}
                   type="email"
-                   spellCheck="false"
+                  spellCheck="false"
                   placeholder="Email*"
                   // style={{ width: "600px" }}
-                  
                 />
                 {errors.email && <div>{errors.email.message}</div>}
               </div>
@@ -166,17 +185,15 @@ function Contact() {
                     },
                   })}
                   type="text"
-                   spellCheck="false"
+                  spellCheck="false"
                   placeholder="Subject*"
                   // style={{ width: "600px" }}
-                  
-                  
                 />
                 {errors.subject && <div>{errors.subject.message}</div>}
               </div>
 
               <div className=" lg:col-span-2 md:w-4/5 lg:w-full flex flex-col items-center justify-center">
-                <textarea 
+                <textarea
                   {...register("message", {
                     required: {
                       value: true,
@@ -193,55 +210,56 @@ function Contact() {
                   style={{ backgroundColor: "white" }}
                   placeholder="Message*"
                   className="p-4 md:w-full lg:w-5/12 w-80  text-stone-400 focus:outline-none"
-                >
-                </textarea>
-                  {errors.message && <div>{errors.message.message}</div>}             
+                ></textarea>
+                {errors.message && <div>{errors.message.message}</div>}
               </div>
-     
-              
-              <div
-                className=" hidden lg:block lg:col-span-2"
-              >
-                <Button disabled={isSubmitting} width="600px" text="SUBMIT NOW" />
+
+              <div className=" hidden lg:block lg:col-span-2">
+                <Button
+                  disabled={isSubmitting}
+                  width="600px"
+                  text="SUBMIT NOW"
+                />
               </div>
-              <div
-                className=" block lg:hidden lg:col-span-2"
-              >
-                <Button disabled={isSubmitting} width="200px" text="SUBMIT NOW" />
+              <div className=" block lg:hidden lg:col-span-2">
+                <Button
+                  disabled={isSubmitting}
+                  width="200px"
+                  text="SUBMIT NOW"
+                />
               </div>
             </div>
           </form>
-          </div>
         </div>
+      </div>
 
-        <section className="pb-20 bg-white">
-          <div>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39297.25520605687!2d-0.16174804564265624!3d51.51629700465517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ce176ac979%3A0x42af85654e23a0b4!2sThe%20National%20Gallery!5e0!3m2!1sen!2sin!4v1725108722815!5m2!1sen!2sin"
-              width="100%"
-              height="450"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </div>
-        </section>
-
-        <div className=" flex items-center justify-center gap-6 bg-white pb-20 ">
-          <div>
-            <TbMailFilled size={21} />
-          </div>
-          <div>
-            <FaFacebookF size={20} />
-          </div>
-          <div>
-            <FaSkype size={21} />
-          </div>
-          <div>
-            <BsTwitterX size={18} />
-          </div>
+      <section className="pb-20 bg-white">
+        <div>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39297.25520605687!2d-0.16174804564265624!3d51.51629700465517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ce176ac979%3A0x42af85654e23a0b4!2sThe%20National%20Gallery!5e0!3m2!1sen!2sin!4v1725108722815!5m2!1sen!2sin"
+            width="100%"
+            height="450"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
-      
+      </section>
+
+      <div className=" flex items-center justify-center gap-6 bg-white pb-20 ">
+        <div>
+          <TbMailFilled size={21} />
+        </div>
+        <div>
+          <FaFacebookF size={20} />
+        </div>
+        <div>
+          <FaSkype size={21} />
+        </div>
+        <div>
+          <BsTwitterX size={18} />
+        </div>
+      </div>
     </>
   );
 }

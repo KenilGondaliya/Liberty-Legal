@@ -16,8 +16,11 @@ app.use(cookieParser())
 
 
 import userRouter from "./routes/user.routes.js"
+import consultantRouter from "./routes/consultant.routes.js"
 
-app.use("/api/v1/users", userRouter)
+app.use("/api/v1/users", userRouter);
+
+app.use("/api/v1/consultant",consultantRouter);
 
 
 

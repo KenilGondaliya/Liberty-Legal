@@ -6,11 +6,6 @@ export default defineConfig({
   server:{
     proxy: {
       '/api': "http://localhost:8000",
-      '/web3forms-api': {
-        target: 'https://api.web3forms.com/submit',
-        changeOrigin: true,
-        
-      },
     }
   },
   plugins: [react()],
