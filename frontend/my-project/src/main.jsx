@@ -20,6 +20,10 @@ import ForgetPassword from "./Components/ForgetPassword.jsx";
 import Profile from "./Components/Profile.jsx";
 import Error from "./Components/UI/Error.jsx";
 import Success from "./Components/UI/Success.jsx";
+import Admin from "./Components/adminPage/Admin.jsx";
+import Consultants from "./Components/adminPage/Consultants.jsx";
+import Aside from "./Components/adminPage/Aside.jsx";
+import User from "./Components/adminPage/User.jsx";
 
 const router = createBrowserRouter([
   {
@@ -90,7 +94,25 @@ const router = createBrowserRouter([
   },
   {
     path: "success",
-    element: <Success/>,
+    element: <Success />,
+  },
+  {
+    path: "aside",
+    element: <Aside />,
+    children: [
+      {
+        path: "dashboard",
+        element: <Admin />,
+      },
+      {
+        path: "users",
+        element: <User />,
+      },
+      {
+        path: "consultants",
+        element: <Consultants />,
+      },
+    ],
   },
 ]);
 

@@ -15,9 +15,7 @@ export const consultantation = asyncHandler(async (req, res) => {
     appointmentTime,
   } = req.body;
 
-  console.log(email);
-  
-
+//   console.log(email);
   
   if (
     [

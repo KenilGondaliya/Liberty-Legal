@@ -1,8 +1,10 @@
 import {Router} from "express";
-import {logoutUser, loginUser, registerUser, changeCurrentPassword, refreshAccessToken } from "../Controllers/user.controllers.js";
+import {logoutUser, loginUser, registerUser, changeCurrentPassword, refreshAccessToken, getAllUsers } from "../Controllers/user.controllers.js";
 import { verifyJWT } from "../middlewares/auth.middlewares.js";
 
 const router = Router()
+
+router.route("/").get(getAllUsers)
 
 router.route("/register").post(registerUser)
 

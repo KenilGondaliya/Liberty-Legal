@@ -4,7 +4,6 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
-
 const generateAccessAndRefrshTokens = async (userId) => {
   try {
     const user = await User.findById(userId);
@@ -147,13 +146,6 @@ const logoutUser = asyncHandler(async (req, res) => {
 });
 
 const changeCurrentPassword = asyncHandler(async (req, res) => {
-  // req.body email, password, confPassword
-  //target user
-  //check email
-  //cheack password and confirm password
-  //update the password
-  // res json and
-
   const { email, password, confPassword } = req.body;
 
   const user = await User.findById(req.user?._id);
@@ -222,6 +214,17 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   }
 });
 
+const getAllUsers = asyncHandler(async (req, res) => {
+  try {
+    const users = await User.find();
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, users, "get successfully"));
+  } catch (error) {
+    throw new ApiError(401, "user not get");
+  }
+});
 
 export {
   registerUser,
@@ -229,5 +232,5 @@ export {
   logoutUser,
   changeCurrentPassword,
   refreshAccessToken,
-  
+  getAllUsers,
 };
