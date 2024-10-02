@@ -31,7 +31,7 @@ function User() {
   };
 
   const handleUpdate = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault(); 
     try {
       const response = await axios.put(
         `/api/v1/users/${editingUser._id}`,
@@ -42,8 +42,8 @@ function User() {
           user._id === editingUser._id ? response.data.data : user
         )
       );
-      setEditingUser(null); // Clear editing state
-      setFormData({ username: "", FullName: "" }); // Clear form data
+      setEditingUser(null); 
+      setFormData({ username: "", FullName: "" }); 
     } catch (error) {
       console.error("Error updating user:", error);
     }

@@ -15,8 +15,8 @@ export const consultantation = asyncHandler(async (req, res) => {
     appointmentTime,
   } = req.body;
 
-//   console.log(email);
-  
+  //   console.log(email);
+
   if (
     [
       fullName,
@@ -30,7 +30,7 @@ export const consultantation = asyncHandler(async (req, res) => {
     throw new ApiError(400, "All fields are required");
   }
 
-  const [day, month, year] = appointmentDate.split('-');
+  const [day, month, year] = appointmentDate.split("-");
   const formattedAppointmentDate = new Date(`${day}-${month}-${year}`);
 
   if (isNaN(formattedAppointmentDate.getTime())) {
@@ -55,6 +55,37 @@ export const consultantation = asyncHandler(async (req, res) => {
 
   return res
     .status(201)
-    .json(new ApiResponse(200, createConsultant, "Consultant Sent Successfully"));
+    .json(
+      new ApiResponse(200, createConsultant, "Consultant Sent Successfully")
+    );
+});
 
+export const getAllConsultant = asyncHandler(async (req, res) => {
+  try {
+    const consultants = await Consultant.find();
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, consultants, "get successfully"));
+  } catch (error) {
+    throw new ApiError(401, "consultants not get");
+  }
+});
+
+export const deleteConsultant = asyncHandler(async (req, res) => {
+  const consultantId = req.params.id;
+  // console.log(userId);
+  try {
+    const deletedConsultant = await Consultant.findByIdAndDelete(consultantId);
+
+    if (!deletedConsultant) {
+      throw new ApiError(404, "Consultant not found");
+  }
+
+  return res.status(200).json(
+    new ApiResponse(200, {}, "Consultant deleted Successfully!!!")
+  );
+  } catch (error) {
+    throw new ApiError(401, "Consultant not deleted");
+  }
 });
