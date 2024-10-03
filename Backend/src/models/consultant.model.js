@@ -14,10 +14,10 @@ const consultantSchema = new Schema(
     },
     email: {
       type: String,
-      required: true, // Ensure it's required
-      unique: true,   // To prevent duplicates
-      trim: true,     // To remove extra spaces
-      lowercase: true // Converts to lowercase before saving
+      required: true, 
+      unique: true, 
+      trim: true,     
+      lowercase: true 
     },
 
     companyName: {

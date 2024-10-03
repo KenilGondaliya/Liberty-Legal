@@ -26,6 +26,15 @@ function Consultants() {
       console.error("Error deleting user:", error);
     }
   };
+    const handleAprrove = async (consultantId) => {
+      try {
+        const response = await axios.put(`/api/v1/consultant/${consultantId}`);
+        setConsultant((prevUsers) => prevUsers.map((consultant) => consultant._id === consultantId));
+        window.location.reload();
+      } catch (error) {
+        console.error("Error deleting user:", error);
+      }
+    };
 
   return (
     <div className="p-6">
@@ -48,7 +57,9 @@ function Consultants() {
                   <td className="py-2 px-4">{consultant.consultantInterest}</td>
                   <td className="py-2 px-4">{consultant.email}</td>
                   <td className="py-2 px-4">
-                    <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded">
+                    <button 
+                    onClick={() => handleAprrove(consultant._id)}
+                     className="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded">
                       Approve
                     </button>
                     <button
