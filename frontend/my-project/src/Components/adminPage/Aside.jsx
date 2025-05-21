@@ -5,7 +5,7 @@ function Aside() {
   return (
     <div className="flex min-h-screen bg-gray-100">
       <aside className="w-64 bg-white shadow-md">
-        <div className="p-4 text-lg font-semibold text-center border-b">
+        <div className="p-4 btnColor text-lg text-white font-semibold text-center border-b">
           Admin Dashboard
         </div>
         <nav className="mt-4">

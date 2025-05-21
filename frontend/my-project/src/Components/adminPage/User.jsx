@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { MdDelete } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
 
 function User() {
   const [users, setUsers] = useState([]);
@@ -90,14 +92,15 @@ function User() {
                   <td className="py-2 px-4">
                   <button
                       onClick={() => handleEditClick(user)}
-                      className="bg-blue-500 text-white px-4 py-1 rounded"
+                     className="m-4"
                     >
-                      Update
+                      <MdEdit size={20} />
+
                     </button>
                     <button 
                     onClick={() => handleDelete(user._id)}
-                     className="bg-red-500 text-white px-4 py-1 rounded ml-2">
-                      Delete
+                     >
+                      <MdDelete color="#9e1b32" size={20}/>
                     </button>
                   </td>
                 </tr>

@@ -150,7 +150,7 @@ export const ApproveConsultant = asyncHandler(async (req, res) => {
 
     const approveConsultant = await Consultant.findByIdAndUpdate(
       consultantId,
-      { status: "approved" }, // Updating the status to approved
+      { status: "approved" },
       { new: true, runValidators: true }
     );
 

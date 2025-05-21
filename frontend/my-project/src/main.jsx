@@ -96,7 +96,7 @@ const router = createBrowserRouter([
     path: "success",
     element: <Success />,
   },
-  {
+  { 
     path: "aside",
     element: <Aside />,
     children: [

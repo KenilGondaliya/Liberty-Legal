@@ -31,6 +31,7 @@ function Consultants() {
         const response = await axios.put(`/api/v1/consultant/${consultantId}`);
         setConsultant((prevUsers) => prevUsers.map((consultant) => consultant._id === consultantId));
         window.location.reload();
+        
       } catch (error) {
         console.error("Error deleting user:", error);
       }

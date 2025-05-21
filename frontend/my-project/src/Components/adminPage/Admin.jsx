@@ -44,10 +44,6 @@ function Admin() {
           <h2 className="text-xl font-medium">Total Consultants</h2>
           <p className="mt-2 text-gray-500">{consultant.length}</p>
         </div>
-        <div className="bg-white p-4 shadow rounded-lg">
-          <h2 className="text-xl font-medium">Active Consultations</h2>
-          <p className="mt-2 text-gray-500">50</p>
-        </div>
       </div>
     </div>
   );
